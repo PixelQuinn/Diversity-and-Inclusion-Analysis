@@ -1,0 +1,25 @@
+workforce,report_year,region,gender_women,gender_men
+overall,2021,AMERICAS (non-US),0.285,0.715
+tech,2021,AMERICAS (non-US),0.232,0.768
+non_tech,2021,AMERICAS (non-US),0.341,0.659
+leadership,2021,AMERICAS (non-US),,0.75
+overall,2022,AMERICAS (non-US),0.358,0.642
+tech,2022,AMERICAS (non-US),0.271,0.729
+non_tech,2022,AMERICAS (non-US),0.406,0.594
+leadership,2022,AMERICAS (non-US),,
+overall,2021,APAC,0.364,0.636
+tech,2021,APAC,0.25,0.75
+non_tech,2021,APAC,0.433,0.567
+leadership,2021,APAC,0.208,0.792
+overall,2022,APAC,0.372,0.628
+tech,2022,APAC,0.249,0.751
+non_tech,2022,APAC,0.468,0.532
+leadership,2022,APAC,0.275,0.725
+overall,2021,EMEA,0.339,0.661
+tech,2021,EMEA,0.279,0.721
+non_tech,2021,EMEA,0.389,0.611
+leadership,2021,EMEA,0.288,0.712
+overall,2022,EMEA,0.385,0.615
+tech,2022,EMEA,0.28,0.72
+non_tech,2022,EMEA,0.492,0.508
+leadership,2022,EMEA,0.471,0.529

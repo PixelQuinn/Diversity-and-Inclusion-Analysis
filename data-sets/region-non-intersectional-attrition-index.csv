@@ -1,0 +1,19 @@
+workforce,report_year,region,gender_women,gender_men
+tech,2021,AMERICAS (non-US),,108
+tech,2022,AMERICAS (non-US),52,117
+overall,2022,AMERICAS (non-US),66,117
+non_tech,2022,AMERICAS (non-US),80,113
+overall,2021,AMERICAS (non-US),97,101
+non_tech,2021,AMERICAS (non-US),97,104
+non_tech,2021,APAC,75,118
+overall,2021,APAC,79,111
+tech,2021,APAC,79,106
+tech,2022,APAC,87,105
+non_tech,2022,APAC,90,104
+overall,2022,APAC,92,101
+non_tech,2022,EMEA,85,115
+overall,2022,EMEA,90,105
+non_tech,2021,EMEA,91,105
+overall,2021,EMEA,92,102
+tech,2022,EMEA,93,102
+tech,2021,EMEA,94,103
