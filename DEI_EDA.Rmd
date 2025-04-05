@@ -45,10 +45,60 @@ census_api_key("MY API HERE", install = TRUE) #Hiding upon submitting for safety
 
 ```{r}
 # Load region-level workforce metrics
-region_rep <- read_csv("region-non-intersectional-representation.csv")
-region_hire <- read_csv("region-non-intersectional-hiring.csv")
-region_exit <- read_csv("region-non-intersectional-exits-representation.csv")
-region_attrition <- read_csv("region-non-intersectional-attrition-index.csv")
+region_rep <- read_csv("data-sets/region-non-intersectional-representation.csv")
+region_hire <- read_csv("data-sets/region-non-intersectional-hiring.csv")
+region_exit <- read_csv("data-sets/region-non-intersectional-exits-representation.csv")
+region_attrition <- read_csv("data-sets/region-non-intersectional-attrition-index.csv")
+```
 
+```{r}
+glimpse(region_rep)
+summary(region_rep)
+head(region_rep)
+```
+```{r}
+glimpse(region_hire)
+summary(region_hire)
+head(region_hire)
+```
+```{r}
+glimpse(region_exit)
+summary(region_exit)
+head(region_exit)
+```
+```{r}
+glimpse(region_attrition)
+summary(region_attrition)
+head(region_attrition)
+```
+```{r}
+region_rep %>%
+  ggplot(aes(x = region, y = gender_women, fill = report_year)) +
+  geom_col(position = "dodge") +
+  facet_wrap(~ workforce) +
+  labs( title = "Representation of Women by Region and Workforce", x = "Region", y = "Proportion of Women") +
+  theme_minimal()
+```
+```{r}
+region_hire <- region_hire %>%
+  mutate(report_year = as.factor(report_year))
+
+ggplot(region_hire, aes(x = region, y = gender_women, fill = report_year)) +
+  geom_col(position = "dodge") +
+  facet_wrap(~ workforce) +
+  labs(title = "Hiring Rate of Women by Region and Workforce Segment",
+       x = "Region", y = "Proportion of Women Hired") +
+  theme_minimal()
+```
+```{r}
+region_exit %>%
+  ggplot(aes(x = region, y = gender_women, fill = report_year)) +
+  geom_col(position = "dodge") +
+  facet_wrap(~ workforce) +
+  labs(
+    title = "Exit Rate of Women by Region and Workforce Segment",
+    x = "Region", y = "Proportion of Women Exiting"
+  ) +
+  theme_minimal()
 ```
 
