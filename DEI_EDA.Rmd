@@ -1,0 +1,54 @@
+---
+title: "Stat184 Class Poject - DEI Analysis"
+output: html_notebook
+---
+
+**Research Question:**  
+*How does gender and ethnicity representation, hiring, and attrition vary across different regions?*
+
+
+### Primary Dataset
+- **Source:** Google Diversity Annual Report data accessed through Google BigQuery
+- **Collected by:** Google Inc.
+- **When & Why:** Published annually to provide info around workforce demographics and support DEI efforts within the company
+- **What is a case?** Each row represents a demographic group such as gender in a given region, along with a specific workforce metric such as hiring, exits, representation, or attrition
+- **Variables of interest:**
+- **Region: The global region of the workforce segment**
+- **Gender or Ethnicity: The demographic group represented**
+- **Hiring, Representation, Exits, Attrition Index: The workforce metric value, depending on the dataset**
+
+
+
+### Secondary Dataset
+
+- **Source:** American Community Survey (ACS) 5-Year Estimates accessed via the `tidycensus` package in R
+- **Collected by:** U.S. Census Bureau
+- **When & Why:** The ACS is collected annually to provide critical demographic, social, economic, and housing data across U.S. regions. This data helps contextualize diversity metrics, such as gender and racial/ethnic representation, in broader U.S. labor markets.
+- **What is a case?** Each case represents a region (e.g., West, Midwest, South, Northeast) or state, along with aggregated population estimates by race, gender, and education level.
+- **Number of Cases:** Varies depending on granularity (e.g., ~50 states or 4 census regions), filtered down based on focus
+- **Variables of interest:**  
+  - Total population by gender  
+  - Total population by race/ethnicity  
+  - Percent of population with a bachelor’s degree or higher (for pipeline comparison)
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(tidycensus)
+```
+
+```{r}
+#API for Tidycensus,PERSONAL REMINDER TO HIDE FROM PROD!!!!!
+census_api_key("MY API HERE", install = TRUE) #Hiding upon submitting for safety & best practice reasons.
+```
+
+
+```{r}
+# Load region-level workforce metrics
+region_rep <- read_csv("region-non-intersectional-representation.csv")
+region_hire <- read_csv("region-non-intersectional-hiring.csv")
+region_exit <- read_csv("region-non-intersectional-exits-representation.csv")
+region_attrition <- read_csv("region-non-intersectional-attrition-index.csv")
+
+```
+
