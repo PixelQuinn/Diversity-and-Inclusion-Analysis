@@ -108,7 +108,7 @@ gender_rep_hiring %>%
 
 ## Insights:
 - A regression line is added to show overall correlation.
-- EMEA is out performing Americas and APAC. 
+- EMEA is out performing The Americas and APAC. 
 - We see Americas and APAC under the trend line.
 - This shows female hiring rates in these areas are lagging behind.
 - All three are below the soft 50% cap.
