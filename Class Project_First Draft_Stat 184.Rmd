@@ -112,3 +112,25 @@ gender_rep_hiring %>%
 - We see Americas and APAC under the trend line.
 - This shows female hiring rates in these areas are lagging behind.
 - All three are below the soft 50% cap.
+
+```{r}
+race_long_format %>%
+  filter(!is.na(proportion)) %>%
+  group_by(region, workforce) %>%
+  mutate(norm_prop = proportion / sum(proportion, na.rm = TRUE)) %>%
+  ggplot(aes(x = region, y = norm_prop, fill = race_group)) +
+  geom_bar(stat = "identity", position = "stack") +
+  facet_wrap(~ workforce) +
+  labs(
+    title = "Normalized Race Representation by Region and Workforce Type",
+    x = "Region",
+    y = "Proportion (Normalized)",
+    fill = "Race Group"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Had to add the mutate to normalize to proper percentage...
+```
+
+## Insights:
