@@ -19,6 +19,7 @@ output: html_notebook
 - [Project Repository](https://github.com/PixelQuinn/Diversity-and-Inclusion-Analysis).
 
 ```{r}
+library(ggplot2)
 library(tidyverse)
 library(readr)
 library(tidycensus)
@@ -73,10 +74,6 @@ race_long_format <- region_rep %>%
 ```{r}
 glimpse(race_long_format)
 ```
-```{r}
-colnames(region_attr_index)
-```
-
 
 ```{r}
 # Calculate average attrition per gender by region.
@@ -89,3 +86,29 @@ region_attr %>%
   )
 ```
 
+```{r}
+gender_rep_hiring %>%
+  filter(!is.na(gender_women_rep), !is.na(gender_women_hire)) %>%
+  group_by(region) %>%
+  summarise(
+    avg_rep = mean(gender_women_rep),
+    avg_hire = mean(gender_women_hire)
+  ) %>%
+  ggplot(aes(x = avg_rep, y = avg_hire)) +
+  geom_point(color = "steelblue", size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "gray40") +
+  geom_text_repel(aes(label = region), size = 3) +
+  labs(
+    title = "Female Representation vs. Hiring by Region",
+    x = "Average Female Representation",
+    y = "Average Female Hiring Rate"
+  ) +
+  theme_minimal()
+```
+
+## Insights:
+- A regression line is added to show overall correlation.
+- EMEA is out performing Americas and APAC. 
+- We see Americas and APAC under the trend line.
+- This shows female hiring rates in these areas are lagging behind.
+- All three are below the soft 50% cap.
