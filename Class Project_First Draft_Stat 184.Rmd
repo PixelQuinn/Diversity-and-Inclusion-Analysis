@@ -165,6 +165,8 @@ region_attr %>%
 - EMEA's male attrition spiked pretty high in 2022, widening the gap.
 
 ```{r}
+## Plotting the Global Self-ID. to find insights on these demographics.
+
 ggplot(self_ID, aes(x = report_year, y = global, color = workforce, group = workforce)) +
   geom_line(size = 1.2) +
   geom_point(size = 2) +
@@ -178,3 +180,8 @@ ggplot(self_ID, aes(x = report_year, y = global, color = workforce, group = work
 ```
 
 ## Insights:
+- Self-identification rates have generally declined across all groups overall.
+- LGBTQ+ employees made up the highest self-ID group in 2019 and kept this lead, even after decline.
+- The drop could be a change in reporting practices, cultural stigma, or workforce demographic shifts.
+- This trend shows the importance of psychological safety and transparent communication on Self-ID in the workplace.
+
