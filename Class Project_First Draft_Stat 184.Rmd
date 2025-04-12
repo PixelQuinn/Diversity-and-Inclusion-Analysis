@@ -139,3 +139,27 @@ race_long_format %>%
 - The Americas showing higher representation of White/European, Hispanic, and African.
 - EMEA and leadership roles across regions show high White/European representation.
 - MENA and Indigenous representation remains minimal as a whole.
+
+
+```{r}
+region_attr %>%
+  pivot_longer(cols = starts_with("gender_"), names_to = "gender", values_to = "attrition_index") %>%
+  ggplot(aes(x = report_year, y = attrition_index, color = gender, group = gender)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 2) +
+  facet_wrap(~ region) +
+  labs(
+    title = "Attrition Index Trends by Gender and Region",
+    x = "Year",
+    y = "Attrition Index",
+    color = "Gender"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## Insights:
+- Across all regions, men consistently exhibit higher attrition index scores than woman.
+- The gap between genders is widest in The Americas.
+- APAC shows relatively stable attrition gaps overtime.
+- EMEA's male attrition spiked pretty high in 2022, widening the gap.
