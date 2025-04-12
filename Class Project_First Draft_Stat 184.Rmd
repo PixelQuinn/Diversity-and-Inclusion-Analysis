@@ -185,3 +185,12 @@ ggplot(self_ID, aes(x = report_year, y = global, color = workforce, group = work
 - The drop could be a change in reporting practices, cultural stigma, or workforce demographic shifts.
 - This trend shows the importance of psychological safety and transparent communication on Self-ID in the workplace.
 
+## Closing thoughts:
+
+This analysis set out to explore how gender, race, and self-identified identity groups are represented across regions and workforce types within a global organization. Through a mix of visual and statistical analysis, clear disparities were revealed across multiple dimensions of diversity.
+
+Gender hiring and attrition trends varied quite a bit by region, with EMEA outperforming other regions in female hiring while APAC and The Americas showed constant gaps. Racial representation was highly uneven, with some groups, such as Indigenous and MENA employees, almost absent across all regions and roles. Self-ID trends showed an overall decline in disclosure, raising important questions about psychological safety and cultural transparency in the workplace.
+
+These findings highlight the need for more regionally tailored diversity strategies, as well as stronger internal communication and support structures that empower employees to disclose identity safely and authentically.
+
+As organizations continue to prioritize DEI, data-driven insights like these will be essential in not only measuring progress, but in guiding equitable, people centered actions.
