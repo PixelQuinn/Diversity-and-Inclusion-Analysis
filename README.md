@@ -42,10 +42,10 @@ This analysis was completed as a final class project for STAT 184 (Data Science 
 
 ## 📌 Next Steps
 
-Future extensions could include:
+Future extensions include:
 - Modeling attrition predictors with logistic regression
 - Adding intersectional analysis (e.g., gender * race combinations)
-- Exporting visualizations to Tableau or Power BI for interactive dashboards
+- Exporting visualizations to Tableau for interactive dashboards
 
 ---
 
