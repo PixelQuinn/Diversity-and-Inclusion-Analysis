@@ -163,3 +163,18 @@ region_attr %>%
 - The gap between genders is widest in The Americas.
 - APAC shows relatively stable attrition gaps overtime.
 - EMEA's male attrition spiked pretty high in 2022, widening the gap.
+
+```{r}
+ggplot(self_ID, aes(x = report_year, y = global, color = workforce, group = workforce)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 2) +
+  labs(
+    title = "Global Self-ID Representation by Workforce Type",
+    x = "Year",
+    y = "Proportion (Self-Identified)",
+    color = "Workforce"
+  ) +
+  theme_minimal()
+```
+
+## Insights:
