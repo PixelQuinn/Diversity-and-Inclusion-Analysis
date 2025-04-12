@@ -122,9 +122,9 @@ race_long_format %>%
   geom_bar(stat = "identity", position = "stack") +
   facet_wrap(~ workforce) +
   labs(
-    title = "Normalized Race Representation by Region and Workforce Type",
+    title = "Race Representation by Region and Workforce Type",
     x = "Region",
-    y = "Proportion (Normalized)",
+    y = "Proportion",
     fill = "Race Group"
   ) +
   theme_minimal() +
@@ -134,3 +134,8 @@ race_long_format %>%
 ```
 
 ## Insights:
+- Each region shows distinct racial composition across workforce types.
+- APAC heavily skewed to Asian representation.
+- The Americas showing higher representation of White/European, Hispanic, and African.
+- EMEA and leadership roles across regions show high White/European representation.
+- MENA and Indigenous representation remains minimal as a whole.
