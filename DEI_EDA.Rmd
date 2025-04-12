@@ -102,3 +102,27 @@ region_exit %>%
   theme_minimal()
 ```
 
+### Summary of Preliminary Observations and Intuition
+
+This exploratory data analysis investigates how gender representation, hiring, and attrition differ across global regions within Google’s workforce. The dataset, sourced from Google’s Diversity Annual Report through BigQuery, includes metrics for tech, non-tech, leadership, and overall segments, broken down by region. Initial EDA will be based off of a soft 50% benchmark as well as comparing the data to eachother.
+
+#### Key Observations:
+- **Representation:**
+  - Women remain underrepresented in tech and leadership roles across all regions.
+  - Non-tech roles show near gender parity, particularly in APAC and EMEA.
+  - Minimal progress had been made between 2021 and 2022 overall.
+
+- **Hiring:**
+  - Hiring of women in leadership roles improved significantly in EMEA and APAC from 2021 to 2022.
+  - Non-tech hiring rates were the highest, typically surpassing the 45% mark.
+  - Tech hiring rates are the lowest and relatively stagnant. This shows potential pipeline issues in this field.
+ 
+- **Exits:**
+  - Women in non-tech roles exit at the highest rates, usually around 40% or greater.
+  - Tech exit rates were lowest, but increase steadily and noticeably in 2022.
+  - Exit patterns show potential retention challenges, especially in non-tech roles.
+ 
+- **Post EDA Thoughts:**
+  Diversity is beyond just hiring the target variable. It is about hiring the right candidate and also retaining them. We need to identify patterns such as in **Non-tech exits** to find issues and insights on how to reconcile. 
+As well as **tech hiring** potentially showing a pattern for a possible internal challenge as well. While progress is being made over all, the slow progress in tech is combatted by a steady exit for women showing some barriers within the role,
+hurting long term impact. This lays the foundation for a deeper analysis exploring the data further.

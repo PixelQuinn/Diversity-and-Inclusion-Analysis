@@ -1,0 +1,91 @@
+---
+title: "Representation & Gender Diversity in Google’s Global Workforce"
+output: html_notebook
+---
+
+## Guiding Research Question
+- How does gender representation, hiring, and attrition vary across regions in Google's workforce?
+
+## Data Access
+
+**Primary Data**
+- Region level workforce metrics such as representation, hiring, exits, and attrition.
+- Source: Google Diversity Report from BigQuery & data available on this Github repo.
+- - [Project Repository](https://github.com/PixelQuinn/Diversity-and-Inclusion-Analysis)
+
+**Secondary Dataset:**
+- Self-ID Representation data, including responses related to LGBTQ+ identity and disability status.
+- Source: Internal Google workforce data (self-reported), accessed through Big Query.
+- [Project Repository](https://github.com/PixelQuinn/Diversity-and-Inclusion-Analysis).
+
+```{r}
+library(tidyverse)
+library(readr)
+library(tidycensus)
+library(janitor)
+```
+
+## Initial Inspection
+
+```{r}
+# Load data
+region_rep <- read_csv("data-sets/region-non-intersectional-representation.csv") %>% clean_names()
+region_hire <- read_csv("data-sets/region-non-intersectional-hiring.csv") %>% clean_names()
+region_exit <- read_csv("data-sets/region-non-intersectional-exits-representation.csv") %>% clean_names()
+region_attr <- read_csv("data-sets/region-non-intersectional-attrition-index.csv") %>% clean_names()
+
+glimpse(region_rep)
+summary(region_rep)
+```
+
+```{r}
+self_ID <- read_csv("data-sets/selfid-representation.csv")
+
+glimpse(self_ID)
+```
+
+```{r}
+# Join the representation and hiring by region, year, and workforce type.
+
+gender_rep_hiring <- region_rep %>%
+  inner_join(region_hire, by = c("region", "report_year", "workforce"), suffix = c("_rep", "_hire"))
+```
+
+```{r}
+gender_rep_hiring %>%
+  filter(!is.na(gender_women_rep), !is.na(gender_women_hire)) %>%
+  group_by(region) %>%
+  summarise(
+    avg_rep_women = mean(gender_women_rep),
+    avg_hire_women = mean(gender_women_hire)
+  )
+```
+
+```{r}
+# Convert race columns into long format for later visualization.
+
+race_long_format <- region_rep %>%
+  pivot_longer(cols = starts_with("race_"),
+               names_to = "race_group",
+               values_to = "proportion")
+```
+
+```{r}
+glimpse(race_long_format)
+```
+```{r}
+colnames(region_attr_index)
+```
+
+
+```{r}
+# Calculate average attrition per gender by region.
+
+region_attr %>%
+  group_by(region) %>%
+  summarise(
+    avg_attr_women = mean(gender_women, na.rm = TRUE),
+    avg_attr_men = mean(gender_men, na.rm = TRUE)
+  )
+```
+
