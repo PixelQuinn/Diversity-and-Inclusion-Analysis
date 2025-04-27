@@ -24,6 +24,8 @@ library(tidyverse)
 library(readr)
 library(tidycensus)
 library(janitor)
+library(dplyr)
+library(ggrepel)
 ```
 
 ## Initial Inspection
@@ -60,6 +62,23 @@ gender_rep_hiring %>%
     avg_rep_women = mean(gender_women_rep),
     avg_hire_women = mean(gender_women_hire)
   )
+```
+
+```{r}
+# Define a function to label representation as "High" or "Low"
+label_rep_level <- function(pct) {
+  if (is.na(pct)) {
+    return(NA)
+  } else if (pct > 0.5) {
+    return("High")
+  } else {
+    return("Low")
+  }
+}
+
+# Apply the function to create a new label
+region_rep <- region_rep %>%
+  mutate(women_rep_label = sapply(gender_women, label_rep_level))
 ```
 
 ```{r}
@@ -185,12 +204,58 @@ ggplot(self_ID, aes(x = report_year, y = global, color = workforce, group = work
 - The drop could be a change in reporting practices, cultural stigma, or workforce demographic shifts.
 - This trend shows the importance of psychological safety and transparent communication on Self-ID in the workplace.
 
-## Closing thoughts:
+```{r}
+# Basic linear regression model
+attrition_model <- lm(attrition_index ~ gender + region, data = region_attr %>%
+                         pivot_longer(cols = starts_with("gender_"), names_to = "gender", values_to = "attrition_index"))
 
-This analysis set out to explore how gender, race, and self-identified identity groups are represented across regions and workforce types within a global organization. Through a mix of visual and statistical analysis, clear disparities were revealed across multiple dimensions of diversity.
+# View model summary
+summary(attrition_model)
+```
 
-Gender hiring and attrition trends varied quite a bit by region, with EMEA outperforming other regions in female hiring while APAC and The Americas showed constant gaps. Racial representation was highly uneven, with some groups, such as Indigenous and MENA employees, almost absent across all regions and roles. Self-ID trends showed an overall decline in disclosure, raising important questions about psychological safety and cultural transparency in the workplace.
+```{r}
+# Expanding the basic model
+# Prepare dataset
+attrition_data <- region_attr %>%
+  pivot_longer(cols = starts_with("gender_"), names_to = "gender", values_to = "attrition_index") %>%
+  left_join(region_rep, by = c("region", "report_year", "workforce")) %>%
+  mutate(workforce = as.factor(workforce),
+         region = as.factor(region),
+         gender = as.factor(gender))
 
-These findings highlight the need for more regionally tailored diversity strategies, as well as stronger internal communication and support structures that empower employees to disclose identity safely and authentically.
+# Fit model
+attrition_model_v2 <- lm(attrition_index ~ gender + region + workforce + report_year, data = attrition_data)
 
-As organizations continue to prioritize DEI, data-driven insights like these will be essential in not only measuring progress, but in guiding equitable, people centered actions.
+# Summary
+summary(attrition_model_v2)
+```
+
+## Machine Learning Model Insights:
+- An expanded linear regression model was built to predict attrition index based on gender, region, workforce type, and report year. 
+- The model explained approximately 64% of the variance in attrition index, suggesting a moderately strong fit.
+- The analysis revealed that gender remains a highly significant predictor.
+- Women had a 23 point lower attrition index compared to men, even after accounting for regional, workforce, and time differences. 
+- No other factors (region, workforce, or year) showed statistically significant predictive power in this model.
+- These results reinforce the critical need to consider gender dynamics in retention strategies. 
+- However, additional variables such as tenure, compensation, and job level may further improve predictive power in future modeling efforts.
+
+## Key Insights and Analysis
+
+Through exploratory analysis and predictive modeling, several critical insights about global workforce diversity emerged:
+
+- **Gender Representation and Hiring**: EMEA consistently outperforms the Americas and APAC regions in hiring women relative to their representation. However, no region reaches parity, highlighting persistent gender hiring gaps globally.
+- **Racial Composition**: Across all workforce categories, White/European employees remain the most highly represented group, especially in leadership roles. Other racial and ethnic groups including Indigenous and MENA remain severely underrepresented.
+- **Self-Identification Trends**: LGBTQ+ and disability self-identification rates have declined since 2019, suggesting a potential decrease in psychological safety or shifts in workforce demographics.
+- **Attrition Trends by Gender**: Men exhibit higher attrition than women across all regions and workforce types. However, attrition patterns differ modestly by region over time.
+- **Predictive Modeling**: A linear regression model predicting attrition index based on gender, region, workforce type, and report year explained approximately 64% of the variance. Gender emerged as the only statistically significant predictor. women showed a 23-point lower attrition index than men after controlling for other factors.
+
+These findings highlight systemic gaps in workplace diversity and inclusion across regions and identity groups. They also suggest that gender specific retention strategies may be the most immediate opportunity for improving workforce equity.
+
+## Recommendations
+
+Based on the findings, several actions are recommended for organizational leadership:
+
+- **Targeted Recruitment Initiatives**: Increase recruitment efforts for women in APAC and the Americas regions to close the gender hiring gap.
+- **Leadership Development for Underrepresented Groups**: Invest in career advancement programs specifically for Black, Hispanic/Latinx, Indigenous, and MENA employees.
+- **Enhance Psychological Safety**: Implement training and communication strategies to encourage safe, voluntary self-identification among employees.
+- **Advanced Attrition Modeling**: Future workforce studies should include variables such as tenure, job level, salary, and performance scores to better predict retention risks.
