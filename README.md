@@ -37,8 +37,8 @@ This analysis was completed as a final class project for STAT 184 (Data Science 
 
 ## 📂 Files Included
 
-- `Class Project_First Draft_Stat 184.Rmd` – Full R Notebook analysis (reproducible code)
-- `Class Project_First Draft_Stat 184.nb.html` – Rendered HTML output
+- `Class Project_Stat 184.Rmd` – Full R Notebook analysis (reproducible code)
+- `Class Project_Stat 184.nb.html` – Rendered HTML output
 - `data-sets/` – Folder containing cleaned CSVs used in the analysis
 
 ---
